@@ -1,0 +1,12 @@
+[submodule "m2000/s0/unik-slg-intro"]
+	path = m2000/s0/unik-slg-intro
+	url = git@github.com:nextsigner/unik-slg-intro.git
+[submodule "m2000/s1/unik-slg-index"]
+	path = m2000/s1/unik-slg-index
+	url = git@github.com:nextsigner/unik-slg-index.git
+[submodule "m2000/s2/unik-slg-001"]
+	path = m2000/s2/unik-slg-001
+	url = git@github.com:nextsigner/unik-slg-001.git
+[submodule "espanish-res"]
+	path = espanish-res
+	url = git@github.com:nextsigner/espanish-res.git
