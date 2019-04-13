@@ -106,13 +106,14 @@ Item {
     }
     MouseArea{
         id: maBX
-        hoverEnabled: true
+        //hoverEnabled: true
         anchors.fill: r
         property bool p: false
         onPChanged: {
             if(p){
-                if(r.qmlCode===''){
-                    click()
+                if(r.qmlCode===''&&!r.canceled){
+                    //click()
+                    tBxCancel.stop()
                     return
                 };
                 tBxCancel.restart()}
@@ -120,16 +121,18 @@ Item {
         onPressed: {
             p=true
             b1.opacity=0.0
+            tBxCancel.restart()
         }
         onReleased: {
             p=false
-            b1.opacity=0.5
+            b1.opacity=0.5            
         }
         onClicked: {
-            p=false
+            tBxCancel.stop()
+            p=true
             b1.opacity=0.5
             if(r.qmlCode===''){
-                //click()
+                click()
                 return
             }
             run.start()
@@ -139,12 +142,11 @@ Item {
         id: run
         interval: r.speed*10
         onTriggered: {
+            tBxCancel.stop()
             tBxEnable.start()
             clicked()
             if(r.canceled){return}
-
             r.runQml(qmlCode)
-
         }
     }
     Timer{
@@ -153,6 +155,8 @@ Item {
         onTriggered: {
             r.canceled=true
             r.enabled=false;
+            maBX.p=false
+            b1.opacity=0.5
             tBxEnable.start();
         }
     }

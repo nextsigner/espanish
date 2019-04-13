@@ -180,7 +180,15 @@ function setSil(){
         }
         //console.log(parseInt(i+1)+':'+space+silabas[i])
         //data+=parseInt(i+1)+':'+space+silabas[i]+'\n'
-        data+='"'+silabas[i]+'":[-1,-1]'
+        if(unik.fileExist('./silabas_ajustadas/'+silabas[i])){
+            var df=''+unik.getFile('./silabas_ajustadas/'+silabas[i])
+            var dfm0=df.split(' ')
+            //console.log('------->'+df)
+            data+='"'+silabas[i]+'":['+dfm0[0]+','+dfm0[1]+']'
+        }else{
+            data+='"'+silabas[i]+'":[-1,-1]'
+        }
+
         if(i!==silabas.length-1){
             data+=','
         }
@@ -190,7 +198,8 @@ function setSil(){
     jsonSil+=data
     jsonSil+='}\n'
     //console.log(data)
-    unik.setFile('/home/nextsigner/jsonSil.json', jsonSil)
+    //unik.setFile('/home/nextsigner/jsonSil.json', jsonSil)
+    unik.setFile('jsonSil.json', jsonSil)
 }
 
 setSil()
