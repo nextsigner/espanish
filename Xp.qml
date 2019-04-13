@@ -39,7 +39,7 @@ Item{
         onTriggered: {
             r.am=[]
             for(var i=0;i<fl.count;i++){
-                if(''+fl.get(i, 'fileName')!=='h'&&''+fl.get(i, 'fileName')!=='.git'){
+                if(''+fl.get(i, 'fileName')!=='espanish-res'&&''+fl.get(i, 'fileName')!=='h'&&''+fl.get(i, 'fileName')!=='.git'){
                     r.am.push(fl.get(i, 'fileName'))
                 }
             }

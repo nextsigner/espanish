@@ -1,17 +1,20 @@
 import QtQuick 2.0
 Item {
-    id: r   
+    id: r
     width: a.contentWidth+app.fs
     height: app.fs*2
     clip: true
     opacity: enabled?1.0:0.5
+    objectName: 'sin_nombre'
     property bool canceled: false
-    property alias t1: a.text
+    property alias text: a.text
     property string t2
     property color c1
     property color c2
-    property string s
-    signal clicked
+    property var objToRunQml
+    property string qmlCode:''
+    property int speed: 100
+    signal click
     Rectangle{
         id: xR1
         color: 'transparent'
@@ -27,8 +30,8 @@ Item {
             height: parent.height-parent.border.width
             radius: parent.radius
             anchors.centerIn: parent
-            color: app.c4
-            Behavior on opacity{NumberAnimation{duration:200}}
+            color: app.c2
+            Behavior on opacity{NumberAnimation{duration:r.speed}}
         }
         Rectangle{
             id: b1
@@ -48,14 +51,14 @@ Item {
                     color: r.c2;
                 }
             }
-            Behavior on opacity{NumberAnimation{duration:500}}
+            Behavior on opacity{NumberAnimation{duration:r.speed*5}}
         }
         Rectangle{
             id: b2
             opacity: 0.5-b1.opacity
             onOpacityChanged: {
                 if(opacity>=0.5&&!maBX.p){
-                    b1.opacity=0.5                   
+                    b1.opacity=0.5
                 }
             }
             width: parent.height
@@ -73,7 +76,7 @@ Item {
                     color: r.c2;
                 }
             }
-       }
+        }
     }
     Text {
         id: a
@@ -106,10 +109,17 @@ Item {
         hoverEnabled: true
         anchors.fill: r
         property bool p: false
-        onPChanged: if(p){tBxCancel.restart()}
+        onPChanged: {
+            if(p){
+                if(r.qmlCode===''){
+                    click()
+                    return
+                };
+                tBxCancel.restart()}
+        }
         onPressed: {
             p=true
-            b1.opacity=0.0           
+            b1.opacity=0.0
         }
         onReleased: {
             p=false
@@ -118,45 +128,43 @@ Item {
         onClicked: {
             p=false
             b1.opacity=0.5
-           run.start()
+            if(r.qmlCode===''){
+                //click()
+                return
+            }
+            run.start()
         }
     }
     Timer{
         id: run
-        interval: 1000
+        interval: r.speed*10
         onTriggered: {
             tBxEnable.start()
             clicked()
             if(r.canceled){return}
-            if(r.s==='inicio'){
-                app.mod=0
-                app.s=0
-                app.prepMod()
-            }else if(r.s==='1'){
-                cp.next()
-            }else if(s.indexOf('{')>-1){
-                console.log('code:'+s)
-                app.runQml(s)
-            }else{
-                app.addA(r.t1, r.t2, r.s)
-            }
+
+            r.runQml(qmlCode)
+
         }
     }
     Timer{
         id: tBxCancel
         interval: 3000
         onTriggered: {
-           r.canceled=true
-           r.enabled=false;
-           tBxEnable.start();
+            r.canceled=true
+            r.enabled=false;
+            tBxEnable.start();
         }
     }
     Timer{
         id: tBxEnable
         interval: 2000
         onTriggered: {
-           r.canceled=false
+            r.canceled=false
             r.enabled=true
         }
+    }
+    function runQml(q){
+        var obj = Qt.createQmlObject(q, objToRunQml, 'botonUx-'+r.objectName)
     }
 }

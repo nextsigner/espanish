@@ -5,6 +5,7 @@ import QtQuick 2.5
 import QtQuick.Controls 2.0
 import Qt.labs.settings 1.0
 import QtWebView 1.1
+//import 'Silabas.js' as Silabas
 
 ApplicationWindow {
     id: app
@@ -48,6 +49,9 @@ ApplicationWindow {
     property alias cp: controles
 
     property var mp:controles.mp
+
+    //Variables de Silabas
+    property var jsonSilabas
 
     onClosing: close.accepted = Qt.platform.os!=='android'
 
@@ -232,6 +236,7 @@ ApplicationWindow {
             }
         }
     }
+    Ms{id:ms}//MagicSil
     Timer{
         id:tu
         running: true
@@ -265,7 +270,6 @@ ApplicationWindow {
             tu.start()
         }
     }
-
     Timer{
         id:tinit
         running: false
@@ -306,6 +310,14 @@ ApplicationWindow {
     onModChanged: appSettings.umod=mod
 
     Component.onCompleted: {
+        //Silabas.setSilMs()
+        //console.log(Silabas.jsonSil)
+
+        var j=unik.getFile('jsonSil.json')
+        jsonSilabas=JSON.parse(j)
+        //PlaySil.jsonSil=jsonSilabas
+
+
         var ukldata='-folder='+appsDir+'/'+app.moduleName+' -cfg'
         var ukl=appsDir+'/link_'+app.moduleName+'.ukl'
         unik.setFile(ukl, ukldata)
@@ -382,6 +394,7 @@ ApplicationWindow {
         tinit.start()
         console.log('appSettings.cbs='+appSettings.cbs)
     }
+
     function prepMod(){
         xT.at=''
         xT.ex=0

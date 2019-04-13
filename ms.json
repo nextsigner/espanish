@@ -1,0 +1,11 @@
+{
+    "modulos":{
+        "m2000":{
+            "par":["En que consiste este Curso Interactivo"],
+            "s0":["intro", "https://github.com/nextsigner/unik-slg-intro.git"],
+            "s1":["indice", "https://github.com/nextsigner/unik-slg-index.git"],
+            "s2":["Contexto y Caractirìsticas de este Curso", "https://github.com/nextsigner/unik-slg-001.git"]
+        }
+    },
+    "info":["Curso Interactivo creado por @nextsigner"]
+}
