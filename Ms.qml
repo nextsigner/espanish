@@ -16,7 +16,7 @@ Rectangle {
         property bool paused
         property int to: 0
         volume: appSettings.volume
-        source: 'espanish-res/ss_0-115A.m4a'
+        source: 'h/sil-qt-v1.0.flac'
         onVolumeChanged:{
             if(volume===0){
                 //mediaPlayer.position=0

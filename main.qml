@@ -5,7 +5,7 @@ import QtQuick 2.5
 import QtQuick.Controls 2.0
 import Qt.labs.settings 1.0
 import QtWebView 1.1
-//import 'Silabas.js' as Silabas
+import 'Silabas.js' as Sil
 
 ApplicationWindow {
     id: app
@@ -310,12 +310,9 @@ ApplicationWindow {
     onModChanged: appSettings.umod=mod
 
     Component.onCompleted: {
-        //Silabas.setSilMs()
-        //console.log(Silabas.jsonSil)
-
+        Sil.setSil()
         var j=unik.getFile('jsonSil.json')
         jsonSilabas=JSON.parse(j)
-        //PlaySil.jsonSil=jsonSilabas
 
 
         var ukldata='-folder='+appsDir+'/'+app.moduleName+' -cfg'
