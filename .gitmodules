@@ -10,3 +10,6 @@
 [submodule "espanish-res"]
 	path = espanish-res
 	url = git@github.com:nextsigner/espanish-res.git
+[submodule "espanish-dev-audio-tools"]
+	path = espanish-dev-audio-tools
+	url = git@github.com:nextsigner/espanish-dev-audio-tools.git
