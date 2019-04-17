@@ -34,11 +34,28 @@ Rectangle{
     property int commandsLineInputHeight: raiz.fontSize*2
 
     property string help: ''
+    property var obj
 
 
     FontLoader {name: "FontAwesome";source: "qrc:/fontawesome-webfont.ttf";}
-    Connections {target: unik;onUkStdChanged: log((''+unik.ukStd).replace(/\n/g, '<br />'));}
-    Connections {target: unik;onStdErrChanged: log((''+unik.ukStd).replace(/\n/g, '<br />'));}
+    Connections {
+        target: unik;
+        onUkStdChanged: {
+            if(!obj){
+                log((''+unik.ukStd).replace(/\n/g, '<br />'));
+            }else{
+                obj.log(unik.ukStd)
+            }
+        }
+        onStdErrChanged:{
+            if(!obj){
+                log((''+unik.ukStd).replace(/\n/g, '<br />'));
+            }else{
+                obj.log(unik.ukStd)
+            }
+        }
+    }
+
     Timer{
         running: raiz.height<=0&&raiz.topHandlerHeight<=0
         repeat: false
@@ -86,6 +103,7 @@ Rectangle{
             color: fontColor
             wrapMode: Text.WordWrap
             textFormat: showPlainText ? Text.Normal : Text.RichText
+            text: obj?'La salida està conectada a otro objeto':'LogView Conectado a Unik'
             onTextChanged: {
                 if(!fk.draged){
                     //fk.uh=contentHeight

@@ -133,6 +133,7 @@ ApplicationWindow {
         Xc{id:xC}
         Xu{id:xU}
         LogView{
+            id: logView
             width: parent.width
             height: appSettings.lvh
             fontSize: app.fs
@@ -311,8 +312,8 @@ ApplicationWindow {
 
     Component.onCompleted: {
         Sil.setSil()
-        var j=unik.getFile('jsonSil.json')
-        jsonSilabas=JSON.parse(j)
+        //var j=unik.getFile('jsonSil.json')
+        //jsonSilabas=JSON.parse(j)
 
 
         var ukldata='-folder='+appsDir+'/'+app.moduleName+' -cfg'
