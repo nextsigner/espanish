@@ -52,6 +52,8 @@ ApplicationWindow {
 
     //Variables de Silabas
     property var jsonSilabas
+    property var arraySilabas: []
+    property var arrayMsSils: []
 
     onClosing: close.accepted = Qt.platform.os!=='android'
 
@@ -311,7 +313,8 @@ ApplicationWindow {
     onModChanged: appSettings.umod=mod
 
     Component.onCompleted: {
-        Sil.setSil()
+        Sil.setDataSils()
+        //Sil.setSil()
         //var j=unik.getFile('jsonSil.json')
         //jsonSilabas=JSON.parse(j)
 

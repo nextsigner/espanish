@@ -1,0 +1,7 @@
+#!/bin/bash
+cat /tmp/msFF/1555422485434.txt  | grep  'silence_' | head -10 | cut -d"]" -f2 | cut -d":" -f2 | \
+while read CMD; 
+do     
+	CANT $(echo $CMD | grep -o "|" | wc -l); 
+
+	done

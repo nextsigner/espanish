@@ -1,5 +1,5 @@
 #!/bin/bash
-cat /tmp/msFF/1555462749425.txt  | grep  'silence_' | cut -d"]" -f2 | cut -d":" -f2 | \
+ffmpeg -i "$1" -af silencedetect=noise=-20dB:d=0.5 -f null - 2>$2 && cat $2  | grep  'silence_' | cut -d"]" -f2 | cut -d":" -f2 | \
 while read CMD; 
 do
 	CANT=$(echo $CMD | grep -o "|" | wc -l); 
