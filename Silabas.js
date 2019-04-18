@@ -1,5 +1,5 @@
 var voiceSil='qt'
-var versionSil='1.2'
+var versionSil='1.3'
 var silMsLocation='./h/sils-ms/'+voiceSil+'-'+versionSil
 var jsonSil=''
 var silabas=[];
@@ -22,6 +22,7 @@ function setDataSils(){
 
 function setSil(){
     var data=''
+    jsonSil=''
     console.log('Cantidad de Silabas: '+silabas.length)
 
     if(!unik.fileExist(silMsLocation)){
@@ -42,7 +43,12 @@ function setSil(){
     jsonSil+='{\n'
     jsonSil+=data
     jsonSil+='}\n'
-    app.jsonSilabas=JSON.parse(jsonSil)
+    try {
+            app.jsonSilabas=JSON.parse(jsonSil);
+        } catch(e) {
+            console.log('Error al crear app.jsonSilabas!')
+        }
+
     //unik.setFile('jsonSil.json', jsonSil)
 }
 function setJsonSilFromMsData(arrayMsData){

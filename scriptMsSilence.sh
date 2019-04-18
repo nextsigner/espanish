@@ -1,5 +1,5 @@
 #!/bin/bash
-ffmpeg -i "$1" -af silencedetect=noise=-20dB:d=0.5 -f null - 2>$2 && cat $2  | grep  'silence_' | cut -d"]" -f2 | cut -d":" -f2 | \
+ffmpeg -i "$1" -af silencedetect=noise=-28dB:d=0.5 -f null - 2>$2 && cat $2 | grep  'silence_' | cut -d"]" -f2 | cut -d":" -f2 | \
 while read CMD; 
 do
 	CANT=$(echo $CMD | grep -o "|" | wc -l); 
@@ -11,10 +11,10 @@ do
 			if [ $CANT = 1 ]
                 	then
                         	VAL=$(echo $CMD | cut -d"|" -f1);
-                        	echo "["$(bc <<< $VAL*1000 | cut -d"." -f1);
+                        	echo $(bc <<< $VAL*1000 | cut -d"." -f1);
                 		#echo $VA;
 			else
-                       		echo ","$(bc <<<  $CMD*1000 | cut -d"." -f1)"]";
+                       		echo " "$(bc <<<  $CMD*1000 | cut -d"." -f1)":";
                 	fi
 			#echo ", ";
 		fi
@@ -22,4 +22,4 @@ do
 	fi
 	#echo ", ";
 done\
-| tr '\n' ' ' | sed 's/]/],/g' > '/home/nextsigner/ms.txt'
+| tr '\n' ' ' | sed 's/ /./g' | sed 's/\.\./ /g' | sed 's/:\./\n/g' > $3
