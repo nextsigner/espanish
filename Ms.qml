@@ -9,19 +9,16 @@ Rectangle {
     height: app.fs*2
     property url source: mediaPlayer.source
     property alias mp: mediaPlayer
-    property var mMsSil: [[0,500], [500, 1000]]
+    property var mMsSil: []
+    property var arrayWord: []
+    property int uNumSilPlay: 0
     MediaPlayer {
         id: mediaPlayer
         property bool p
         property bool paused
         property int to: 0
         volume: appSettings.volume
-        source: 'h/sils-ms/qt-1.3/sil-qt-v1.3.flac'
-        onVolumeChanged:{
-            if(volume===0){
-                //mediaPlayer.position=0
-            }
-        }
+        source: 'h/sils-ms/qt-1.4/sil-qt-v1.4.flac'
         onPlaying: {
             tstop.running=true
             p=true
@@ -39,28 +36,7 @@ Rectangle {
             if(status===MediaPlayer.EndOfMedia){
                 //app.verAyuda=true
             }
-        }
-        onPositionChanged: {
-            if(position>=to){
-                //volume=0
-            }
-            //seekSlider.playPosition=position
-        }
-        onDurationChanged: {
-            //mediaPlayer.play()
-            //seekSlider.duration = duration
-
-        }
-        //Component.onCompleted: app.mp=mediaPlayer
-    }
-
-    Text {
-        id: txtInfo
-        font.pixelSize: app.fs*0.5
-        anchors.bottom: r.bottom
-        anchors.bottomMargin: app.fs*0.1
-        color: app.c4
-        text: 'A'
+        }        
     }
     Timer{
         id: tstop
@@ -71,13 +47,63 @@ Rectangle {
             if(mediaPlayer.position>=mediaPlayer.to){
                 tstop.running=false
                 mediaPlayer.stop()
+                if(uNumSilPlay!==arrayWord.length-1){
+                    uNumSilPlay++
+                    playSil(arrayWord[uNumSilPlay])
+
+                }else{
+                    uNumSilPlay=0
+                }
             }
         }
     }
+    Timer{
+        id: tSpace
+        repeat: false
+        running: false
+        interval: 600
+        onTriggered: {
+            if(mediaPlayer.position>=mediaPlayer.to){
+                tstop.running=false
+                mediaPlayer.stop()
+                if(uNumSilPlay!==arrayWord.length-1){
+                    uNumSilPlay++
+                    playSil(arrayWord[uNumSilPlay])
+
+                }else{
+                    uNumSilPlay=0
+                }
+            }
+        }
+    }
+
     function playSil(s){
-        mediaPlayer.seek(app.jsonSilabas[s][0])
-        mediaPlayer.to=app.jsonSilabas[s][1]
+        if(typeof s === 'string'){
+            /*if(s===' '){
+                uNumSilPlay++
+                tSpace.start()
+                return
+            }*/
+            console.log('PS: '+s)
+            mediaPlayer.seek(app.jsonSilabas[s][0])
+            mediaPlayer.to=app.jsonSilabas[s][1]
+        }else{
+            console.log('PS2: '+s)
+            var ss=app.arraySilabas[getNumSil(s)]
+            console.log('SS: '+ss)
+            mediaPlayer.seek(app.jsonSilabas[ss][0])
+            mediaPlayer.to=app.jsonSilabas[ss][1]
+        }
         tstop.running=true
         mediaPlayer.play()
+    }
+    function getNumSil(s){
+        var n=-1
+        for(var i=0;i<app.arraySilabas.length;i++){
+            if(s===app.arraySilabas[i]){
+                return i;
+            }
+        }
+        return n;
     }
 }

@@ -1,5 +1,5 @@
 var voiceSil='qt'
-var versionSil='1.3'
+var versionSil='1.4'
 var silMsLocation='./h/sils-ms/'+voiceSil+'-'+versionSil
 var jsonSil=''
 var silabas=[];
@@ -35,11 +35,13 @@ function setSil(){
         }else{
             data+='"'+app.arraySilabas[i]+'":[-1,   -1]'
         }
-        if(i!==app.arraySilabas.length-1){
+        //if(i!==app.arraySilabas.length-1){
             data+=',   '
-        }
+        //}
         data+='\n'
     }
+    data+='"|":[0,   10]'
+    data+='\n'
     jsonSil+='{\n'
     jsonSil+=data
     jsonSil+='}\n'
@@ -51,6 +53,9 @@ function setSil(){
 
     //unik.setFile('jsonSil.json', jsonSil)
 }
+
+
+
 function setJsonSilFromMsData(arrayMsData){
     var data=''
     console.log('Cantidad de Silabas: '+silabas.length)
