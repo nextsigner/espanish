@@ -1,11 +1,11 @@
 {
     "modulos":{
         "m2000":{
-            "par":["En que consiste este Curso Interactivo"],
-            "s0":["intro", "https://github.com/nextsigner/unik-slg-intro.git"],
-            "s1":["indice", "https://github.com/nextsigner/unik-slg-index.git"],
-            "s2":["Lista de Sìlabas", "https://github.com/nextsigner/unik-slg-001.git"],
-            "s3":["Lector de Sìlabas", "https://github.com/nextsigner/unik-slg-002.git"]
+            "par":["Sìlabas"],
+            "s0":["intro", "https://github.com/nextsigner/espanish-mod-intro.git"],
+            "s1":["indice", "https://github.com/nextsigner/espanish-mod-index.git"],
+            "s2":["Lista de Sìlabas", "https://github.com/nextsigner/espanish-mod-001.git"],
+            "s3":["Lector de Sìlabas", "https://github.com/nextsigner/espanish-mod-002.git"]
 	}
     },
     "info":["Curso Interactivo creado por @nextsigner"]
