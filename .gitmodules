@@ -13,3 +13,6 @@
 [submodule "espanish-dev-audio-tools"]
 	path = espanish-dev-audio-tools
 	url = git@github.com:nextsigner/espanish-dev-audio-tools.git
+[submodule "espanish-mod-002"]
+	path = espanish-mod-002
+	url = git@github.com:nextsigner/espanish-mod-002.git
