@@ -1,5 +1,7 @@
 # espanish
 
+Aplicaciòn para practicar Español.
+
 Para màs informaciòn
 Twitter: @nextsigner
 E-mail: nextsigner@gmail.com
