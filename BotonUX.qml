@@ -1,16 +1,17 @@
 import QtQuick 2.0
 Item {
     id: r
-    width: a.contentWidth+app.fs
-    height: app.fs*2
+    width: a.contentWidth+r.fs
+    height: r.fs*2
     clip: true
     opacity: enabled?1.0:0.5
     objectName: 'sin_nombre'
+    property int fs: app.fs
     property bool canceled: false
     property alias text: a.text
     property string t2
-    property color c1
-    property color c2
+    property color backgroudColor: app.c3
+    property color fontColor: app.c2
     property var objToRunQml
     property string qmlCode:''
     property int speed: 100
@@ -19,10 +20,10 @@ Item {
         id: xR1
         color: 'transparent'
         border.width: app.fs*0.1
-        border.color: r.c2
+        border.color: r.fontColor
         radius: app.fs*0.2
-        width: a.contentWidth+app.fs
-        height: app.fs*2
+        width: a.contentWidth+r.fs
+        height: r.fs*2
         Rectangle{
             id: b3
             opacity: b1.opacity!==0.5?1.0:0.0
@@ -48,7 +49,7 @@ Item {
                 }
                 GradientStop {
                     position: 1.00;
-                    color: r.c2;
+                    color: r.fontColor;
                 }
             }
             Behavior on opacity{NumberAnimation{duration:r.speed*5}}
@@ -73,23 +74,23 @@ Item {
                 }
                 GradientStop {
                     position: 1.00;
-                    color: r.c2;
+                    color: r.fontColor;
                 }
             }
         }
     }
     Text {
         id: a
-        font.pixelSize: app.fs
-        color: r.c2
+        font.pixelSize: r.fs
+        color: r.fontColor
         anchors.centerIn: parent
         visible: r.enabled
     }
     Text {
         id: a2
         text:a.text
-        font.pixelSize: app.fs
-        color: r.c1
+        font.pixelSize: r.fs
+        color: r.backgroudColor
         x: !maBX.p?a.x:a.x+2
         y:a.y
         visible: r.enabled
@@ -99,7 +100,7 @@ Item {
     Text {
         id: txtCancel
         text: '<b>?</b>'
-        font.pixelSize: app.fs*2
+        font.pixelSize: r.fs*2
         color: 'red'
         anchors.centerIn: parent
         visible: !r.enabled

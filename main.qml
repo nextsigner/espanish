@@ -15,7 +15,7 @@ ApplicationWindow {
     width: 720
     height: 480
     color: app.c3
-    property string moduleName: 'unik-slg'
+    property string moduleName: 'espanish'
     property real ffs: Qt.platform.os!=='android'?0.027:0.03
     property int fs: app.width>app.height?app.width*ffs:app.height*ffs//App Font Size Value
     property int an: app.width>app.height?app.width:app.height
@@ -59,7 +59,7 @@ ApplicationWindow {
 
     Settings{
         id: appSettings
-        category: 'conf-unik-slg'
+        category: 'conf-unik-slg2'
         property int cantRun
         property bool fullScreen
         property real volume
@@ -314,10 +314,6 @@ ApplicationWindow {
 
     Component.onCompleted: {
         Sil.setDataSils()
-        //Sil.setSil()
-        //var j=unik.getFile('jsonSil.json')
-        //jsonSilabas=JSON.parse(j)
-
 
         var ukldata='-folder='+appsDir+'/'+app.moduleName+' -cfg'
         var ukl=appsDir+'/link_'+app.moduleName+'.ukl'
@@ -378,12 +374,20 @@ ApplicationWindow {
         }
         app.umod=appSettings.umod
         app.us=appSettings.ucs
-        if(!unik.fileExist('/home/nextsigner')){
+
+        var qt=false
+        var omitirIntro=false
+        if(omitirIntro){
+            if(qt){
+                app.mod=0
+                app.s=0
+            }else{
+                app.mod=app.umod
+                app.s=app.us
+            }
+        }else{
             app.mod=0
             app.s=0
-        }else{
-            app.mod=app.umod
-            app.s=app.us
         }
 
         if(appSettings.tema<=0){
@@ -599,7 +603,7 @@ ApplicationWindow {
         var obj = Qt.createQmlObject(code, xS, 'xm2'+nid)
         xC.z=xS.z+1
         xEstado.text=''
-        tShowS.stop()       
+        tShowS.stop()
     }
     function showCab(){
         app.cb.tit="Modulo "+parseInt(app.mod+1)+" de "+app.cantmod+" Secciòn "+parseInt(app.s+1)+" de "+app.cants
