@@ -19,7 +19,7 @@ Item {
         id: xR1
         color: 'transparent'
         border.width: app.fs*0.1
-        border.color: r.c1
+        border.color: r.c2
         radius: app.fs*0.2
         width: a.contentWidth+app.fs
         height: app.fs*2
@@ -81,7 +81,7 @@ Item {
     Text {
         id: a
         font.pixelSize: app.fs
-        color: r.c1
+        color: r.c2
         anchors.centerIn: parent
         visible: r.enabled
     }
@@ -89,7 +89,7 @@ Item {
         id: a2
         text:a.text
         font.pixelSize: app.fs
-        color: r.c2
+        color: r.c1
         x: !maBX.p?a.x:a.x+2
         y:a.y
         visible: r.enabled
