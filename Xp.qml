@@ -39,7 +39,7 @@ Item{
         onTriggered: {
             r.am=[]
             for(var i=0;i<fl.count;i++){
-                if(''+fl.get(i, 'fileName')!=='espanish-res'&&''+fl.get(i, 'fileName')!=='h'&&''+fl.get(i, 'fileName')!=='.git'){
+                if(''+fl.get(i, 'fileName')!=='espanish-res'&&''+fl.get(i, 'fileName')!=='h'&&''+fl.get(i, 'fileName')!=='.git'&&''+fl.get(i, 'fileName')!=='espanish-dev-audio-tools'&&''+fl.get(i, 'fileName')!=='espanish-mod-002'){
                     r.am.push(fl.get(i, 'fileName'))
                 }
             }
