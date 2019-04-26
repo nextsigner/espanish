@@ -197,6 +197,7 @@ Rectangle{
                 t: '<b>?</b>'
                 b: raiz.bgColor
                 c: raiz.fontColor
+                d: 'Ayuda'
                 onClicking: {
                     logTxt.text+=raiz.help
                     fk.contentY=fk.contentHeight-fk.height
@@ -217,13 +218,18 @@ Rectangle{
                 c: raiz.fontColor
                 visible: !raiz.enUnikTools
                 onClicking: {
-                    //unik.mainWindow(1).close();
-                    var main=appsDir+'/unik-tools/main.qml'
-                    unik.log('Loading Unik-Tools Home: '+main)
-                    engine.load(main)
+                    var params=''
+                    params+='-folder='+pws+'/unik-tools'
+                    params+=",-dir="+pws+'/unik-tools'
+                    unik.setUnikStartSettings(params)
+                    if(Qt.platform.os!=='android'){
+                        unik.restartApp("")
+                    }else{
+                        unik.restartApp()
+                    }
+
                 }
             }
-
             Boton{//Restart
                 w:parent.height
                 h: w
@@ -232,7 +238,11 @@ Rectangle{
                 c: raiz.fontColor
                 visible: !raiz.enUnikTools
                 onClicking: {
-                    unik.restartApp()
+                    if(Qt.platform.os!=='android'){
+                        unik.restartApp("")
+                    }else{
+                        unik.restartApp()
+                    }
                 }
                 Text {
                     text: "\uf011"

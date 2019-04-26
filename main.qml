@@ -15,6 +15,7 @@ ApplicationWindow {
     width: 720
     height: 480
     color: app.c3
+    property bool qt: false
     property string moduleName: 'espanish'
     property real ffs: Qt.platform.os!=='android'?0.027:0.03
     property int fs: app.width>app.height?app.width*ffs:app.height*ffs//App Font Size Value
@@ -142,6 +143,8 @@ ApplicationWindow {
             topHandlerHeight: Qt.platform.os!=='android'?app.fs*0.25:app.fs*0.75
             anchors.bottom: parent.bottom
             visible: appSettings.logViewVisible
+            fontColor: app.c2
+            bgColor: app.c3
         }
         Xb{
             id:xB
@@ -375,20 +378,28 @@ ApplicationWindow {
         app.umod=appSettings.umod
         app.us=appSettings.ucs
 
-        var qt=false
+        //@param omitirIntro
+        //Segùn sea necesario la aplicaciòn puede ser forzada
+        //a iniciar con el mòdulo 0 y secciòn 0,
+        //es decir la primer subcarpeta
+        //de la primer carpeta
+        //de la lista de carpetas no omitidas
+        //en el mòdulo Xp.qml.
         var omitirIntro=false
-        if(omitirIntro){
-            if(qt){
-                app.mod=0
-                app.s=0
-            }else{
-                app.mod=app.umod
-                app.s=app.us
-            }
-        }else{
+
+        if(app.qt){
             app.mod=0
             app.s=0
+        }else{
+            if(omitirIntro){
+                app.mod=app.umod
+                app.s=app.us
+            }else{
+                app.mod=0
+                app.s=0
+            }
         }
+
 
         if(appSettings.tema<=0){
             appSettings.tema=1
@@ -411,10 +422,7 @@ ApplicationWindow {
             xEstado.text='Error al leer carpetas del sistema...'
             return
         }
-        if(mod==='undefined'){
-            xEstado.text='Restaurando modulo...'
-            app.mod=0
-        }
+
         xEstado.text='Preparando Modulo: '+parseInt(app.mod+1)+'\nCarpeta: '+app.qlandPath+'/'+xP.am[app.mod]
         for(var i=0;i<xS.children.length;i++){
             xS.children[i].destroy(1)
